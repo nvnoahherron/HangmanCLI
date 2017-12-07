@@ -21,6 +21,8 @@ var letterPrompt = [{
 
 }];
 
+// var currentWord = getWord();
+
 var getWord = function(){
 		//create a variable which is set to a random index for wordArray
  		var randomWord = (Math.floor(Math.random() * wordArray.length));
@@ -31,37 +33,36 @@ var getWord = function(){
 
 	}
 
-var newGame = function(){
+var currentWord = getWord();
 
-	var gameWord = getWord();
+
+
+var newGame = function(){
 
 	inquirer.prompt(letterPrompt).then(function(inquirerResponse){
 
-		gameWord.checkLetter(inquirerResponse.guess);
-		gameWord.display();
+		currentWord.checkLetter(inquirerResponse.guess);
+		currentWord.display();
 
-		if (gameWord.letters === gameWord) {
-			console.log("You win");
-			inquirer.prompt(gamePrompt).then(function(inquirerResponse){
-				if (inquirerResponse.confirm) {
-					newGame();
-				}
-			})
-		} else {
-			guessLetter();
+		if (inquirerResponse.guess === currentWord) {
+			console.log("You win!")
 		}
+
+
+		guessLetter();
+
 
 	})
 };
 
 var guessLetter = function(){
 
-	gameWord = getWord();
-
 	inquirer.prompt(letterPrompt).then(function(inquirerResponse){
 
-	gameWord.checkLetter(inquirerResponse.guess);
-	gameWord.display();
+	currentWord.checkLetter(inquirerResponse.guess);
+	currentWord.display();
+
+	guessLetter();
 
 })
 }

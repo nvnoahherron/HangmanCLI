@@ -35,8 +35,11 @@ var Word = function(gameWord){
 				if (item.display === true) {
 
 					guessSoFar += item.value;
+
 				} else {
+
 					guessSoFar += item.placeholder;
+
 				}
 
 		})
